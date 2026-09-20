@@ -1,10 +1,22 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="A simple weather dashboard powered by Open-Meteo." />
-    <title>SkyCast Weather Dashboard</title>
+    <meta name="description" content="Painel de previsão do tempo em tempo real: busque qualquer cidade ou use sua localização e veja a previsão de 7 dias. Feito com JavaScript, Vite e a API Open-Meteo." />
+<meta name="theme-color" content="#2563eb" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="pt_BR" />
+<meta property="og:site_name" content="SkyCast" />
+<meta property="og:title" content="SkyCast — Painel de previsão do tempo" />
+<meta property="og:description" content="Painel de previsão do tempo em tempo real: busque qualquer cidade ou use sua localização e veja a previsão de 7 dias. Feito com JavaScript, Vite e a API Open-Meteo." />
+<meta property="og:url" content="https://ruangdev0-ux.github.io/conectaedu/" />
+<meta property="og:image" content="https://ruangdev0-ux.github.io/conectaedu/preview.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+    <title>SkyCast — Painel de previsão do tempo</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%80%EF%B8%8F%3C/text%3E%3C/svg%3E" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -12,30 +24,30 @@
   <body>
     <div class="app-shell">
       <header class="topbar">
-        <a class="brand" href="./" aria-label="SkyCast home"><span class="brand-mark">☼</span> SkyCast</a>
-        <p class="api-note">Live weather · Open-Meteo</p>
+        <a class="brand" href="./" aria-label="SkyCast — página inicial"><span class="brand-mark">☼</span> SkyCast</a>
+        <p class="api-note">Previsão ao vivo · Open-Meteo</p>
       </header>
 
       <main>
         <section class="hero" aria-labelledby="page-title">
           <div>
-            <p class="eyebrow">YOUR WEATHER, AT A GLANCE</p>
-            <h1 id="page-title">Plan your day<br /><em>with confidence.</em></h1>
+            <p class="eyebrow">SUA PREVISÃO DO TEMPO, EM RESUMO</p>
+            <h1 id="page-title">Planeje seu dia<br /><em>com confiança.</em></h1>
           </div>
           <form id="search-form" class="search-form" role="search">
-            <label class="sr-only" for="city-input">Search for a city</label>
+            <label class="sr-only" for="city-input">Buscar uma cidade</label>
             <span aria-hidden="true">⌕</span>
-            <input id="city-input" name="city" type="search" placeholder="Search city..." autocomplete="off" required />
-            <button type="submit">Search</button>
+            <input id="city-input" name="city" type="search" placeholder="Buscar cidade..." autocomplete="off" required />
+            <button type="submit">Buscar</button>
           </form>
-          <button id="location-button" class="location-button" type="button">◎ Use my location</button>
+          <button id="location-button" class="location-button" type="button">◎ Usar minha localização</button>
         </section>
 
         <div id="status" class="status" role="status" aria-live="polite"></div>
         <section id="weather-content" hidden>
           <div class="location-heading">
             <div>
-              <p class="eyebrow">CURRENT CONDITIONS</p>
+              <p class="eyebrow">CONDIÇÕES ATUAIS</p>
               <h2 id="location-name">—</h2>
               <p id="updated-at" class="muted">—</p>
             </div>
@@ -51,23 +63,23 @@
             </article>
 
             <article class="details-card card">
-              <h3>Today’s details</h3>
+              <h3>Detalhes de hoje</h3>
               <div class="details-grid">
-                <div><span class="detail-icon">💧</span><small>Humidity</small><strong id="humidity">—</strong></div>
-                <div><span class="detail-icon">💨</span><small>Wind</small><strong id="wind">—</strong></div>
-                <div><span class="detail-icon">🌡</span><small>Feels like</small><strong id="feels-like">—</strong></div>
-                <div><span class="detail-icon">☔</span><small>Rain chance</small><strong id="rain-chance">—</strong></div>
+                <div><span class="detail-icon">💧</span><small>Umidade</small><strong id="humidity">—</strong></div>
+                <div><span class="detail-icon">💨</span><small>Vento</small><strong id="wind">—</strong></div>
+                <div><span class="detail-icon">🌡</span><small>Sensação térmica</small><strong id="feels-like">—</strong></div>
+                <div><span class="detail-icon">☔</span><small>Chance de chuva</small><strong id="rain-chance">—</strong></div>
               </div>
             </article>
           </div>
 
           <section class="forecast-section" aria-labelledby="forecast-title">
-            <div class="section-heading"><h3 id="forecast-title">7-day forecast</h3><span class="muted">Daily outlook</span></div>
+            <div class="section-heading"><h3 id="forecast-title">Previsão para 7 dias</h3><span class="muted">Visão diária</span></div>
             <div id="forecast" class="forecast-list"></div>
           </section>
         </section>
       </main>
-      <footer>Data provided by <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo</a> · No API key required</footer>
+      <footer>Dados fornecidos por <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo</a> · Sem necessidade de chave de API</footer>
     </div>
     <script type="module" src="/src/main.js"></script>
   </body>
